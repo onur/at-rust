@@ -3,6 +3,12 @@ Orijinal at'a sadik kalinarak rastgele bir sozlukten alinan
 entrylerden rastgele bir tanesi gosterimektedir.
 """
 
+# TODO: command'in sozluk'u bundan daha ustun. Eger hic bir sey bulamazsa
+#       eksiden 'bunu mu demek istemistiniz' dedigi linkleri takip ediyor.
+#       Boyle bir fonksiyon eklenebilir. Ayrica command'in sozlugu her seye
+#       laf yetistirebiliyor. Bu daha cabuk tikaniyor. Belki eksinin linkleri
+#       takip edilerek cozulebilir.
+
 import random
 import requests
 from bs4 import BeautifulSoup
@@ -20,11 +26,17 @@ def inci(sorgu):
                                    .get_text().strip())
 
 
-def eksi(sorgu):
-    r = requests.get('https://eksisozluk.com/', params={'q': sorgu})
+def eksi(sorgu, follow=True):
+    r = requests.get('https://eksisozluk.com/' + sorgu)
     soup = BeautifulSoup(r.text, 'html.parser')
     entry_list = soup.find(id='entry-list')
-    if not entry_list:
+    # Eger hic entry yoksa 'bunu mu demek istemistiniz'
+    # baglantisi takip ediliyor
+    if not entry_list and follow:
+        suggested = soup.find('a', {'class': 'suggested-title'})
+        if suggested:
+            return eksi(suggested.get('href'), False)
+    elif not entry_list:
         return None
     entryler = entry_list.find_all('li')
     return (random.choice(entryler).find('div', {'class': 'content'})
