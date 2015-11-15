@@ -12,7 +12,6 @@ def selam(bot, trigger):
                 'Panting and sweating as you run through my corridors. How '
                 'can you challenge a perfect immortal machine?')
     elif trigger.nick == 'command':
-        bot.say(trigger.nick + ': baba')
+        bot.reply(baba')
     else:
-        bot.say(random.choice(['s.a', 'selam', 'merhaba']) + ' ' +
-                trigger.nick)
+        bot.reply(random.choice(['s.a', 'selam', 'merhaba']))
