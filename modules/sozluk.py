@@ -80,6 +80,6 @@ def sozluk(bot, trigger):
     fs = random.sample([inci, eksi, uludag], 3)
     cevap = fs[0](sorgu) or fs[1](sorgu) or fs[2](sorgu)
     if not cevap:
-        bot.say(trigger.nick + ': Hic bisey bulamadim')
+        bot.reply('Hic bisey bulamadim')
     else:
-        bot.say(trigger.nick + ': ' + cevap)
+        bot.reply(cevap)
