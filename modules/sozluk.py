@@ -62,18 +62,24 @@ def handler(cevap, bot, trigger):
 
 
 @module.commands('eksi')
+@module.example('.eksi debian')
 def eksi_handler(bot, trigger):
+    """Eksisozlukten bisey getir"""
     handler(eksi(trigger.group(2)), bot, trigger)
 
 
 @module.commands('inci')
+@module.example('.inci debian')
 def inci_handler(bot, trigger):
+    """Incisozlukten bisey getir"""
     handler(inci(trigger.group(2)), bot, trigger)
 
 
 @module.commands('ulu')
 @module.commands('uludag')
+@module.example('.uludag debian')
 def ulu_handler(bot, trigger):
+    """Uludagsozlukten bisey getir"""
     handler(uludag(trigger.group(2)), bot, trigger)
 
 
