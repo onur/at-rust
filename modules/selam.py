@@ -13,5 +13,5 @@ def selam(bot, trigger):
     elif trigger.nick == 'command':
         bot.say(trigger.nick + ': baba')
     else:
-        bot.say(trigger.nick + ': ' +
-                random.choice(['s.a', 'selam', 'merhaba']))
+        bot.say(random.choice(['s.a', 'selam', 'merhaba']) + ' ' +
+                trigger.nick)
