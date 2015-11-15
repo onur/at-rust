@@ -42,6 +42,29 @@ def uludag(sorgu):
                                    .get_text().strip())
 
 
+def handler(cevap, bot, trigger):
+    if cevap:
+        bot.reply(cevap)
+    else:
+        bot.reply('yok boyle bisi')
+
+
+@module.commands('eksi')
+def eksi_handler(bot, trigger):
+    handler(eksi(trigger.group(2)), bot, trigger)
+
+
+@module.commands('inci')
+def inci_handler(bot, trigger):
+    handler(inci(trigger.group(2)), bot, trigger)
+
+
+@module.commands('ulu')
+@module.commands('uludag')
+def ulu_handler(bot, trigger):
+    handler(uludag(trigger.group(2)), bot, trigger)
+
+
 @module.rule('.+$nickname')
 @module.rule('$nickname.+')
 def sozluk(bot, trigger):
