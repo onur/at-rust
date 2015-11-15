@@ -36,7 +36,7 @@ def eksi(sorgu, follow=True):
         suggested = soup.find('a', {'class': 'suggested-title'})
         if suggested:
             return eksi(suggested.get('href'), False)
-    elif not entry_list:
+    if not entry_list:
         return None
     entryler = entry_list.find_all('li')
     return (random.choice(entryler).find('div', {'class': 'content'})
