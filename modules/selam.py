@@ -1,3 +1,4 @@
+""" Kanala artistik giris ve girenlere selam ver """
 
 import random
 from sopel import module
