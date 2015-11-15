@@ -1,0 +1,6 @@
+*.db
+logs/
+malwaredomains.txt
+local.cfg
+*.pyc
+*.pid
