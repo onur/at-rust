@@ -9,8 +9,10 @@ entrylerden rastgele bir tanesi gosterimektedir.
 #       laf yetistirebiliyor. Bu daha cabuk tikaniyor. Belki eksinin linkleri
 #       takip edilerek cozulebilir.
 
+import re
 import random
 import requests
+from collections import Counter
 from bs4 import BeautifulSoup
 from sopel import module
 
@@ -101,3 +103,33 @@ def sozluk(bot, trigger):
         bot.reply('Hic bisey bulamadim')
     else:
         bot.reply(cevap)
+
+
+# Kanal gundeminin belirlenmesi
+konusulan_kelimeler = []
+konusma_sayisi = 0
+
+
+@module.rule('.*')
+def gundem(bot, trigger):
+    # FIXME: globalden baska bir cozum olsa daha iyi olurdu
+    global konusulan_kelimeler
+    global konusma_sayisi
+
+    kelimeler = trigger.split()
+
+    for kelime in kelimeler:
+        # En az 5 karakterli sadece harf ve rakamlardan
+        # olusan kelimeleri ekliyoruz
+        if len(kelime) >= 5 and re.match('^\w+$', kelime):
+            konusulan_kelimeler.append(kelime.lower())
+
+    konusma_sayisi += 1
+
+    if konusma_sayisi >= 30:
+        en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
+        cevap = eksi(en_cok_konusulan)
+        handler(cevap, bot, trigger)
+
+        konusulan_kelimeler = []
+        konusma_sayisi = 0
