@@ -56,7 +56,7 @@ def uludag(sorgu):
                                    .get_text().strip())
 
 
-def handler(cevap, bot, trigger):
+def cevap_ver(cevap, bot, trigger):
     if cevap:
         bot.reply(cevap)
     else:
@@ -65,24 +65,24 @@ def handler(cevap, bot, trigger):
 
 @module.commands('eksi')
 @module.example('.eksi debian')
-def eksi_handler(bot, trigger):
+def eksi_komutu(bot, trigger):
     """Eksisozlukten bisey getir"""
-    handler(eksi(trigger.group(2)), bot, trigger)
+    cevap_ver(eksi(trigger.group(2)), bot, trigger)
 
 
 @module.commands('inci')
 @module.example('.inci debian')
-def inci_handler(bot, trigger):
+def inci_komutu(bot, trigger):
     """Incisozlukten bisey getir"""
-    handler(inci(trigger.group(2)), bot, trigger)
+    cevap_ver(inci(trigger.group(2)), bot, trigger)
 
 
 @module.commands('ulu')
 @module.commands('uludag')
 @module.example('.uludag debian')
-def ulu_handler(bot, trigger):
+def ulu_komutu(bot, trigger):
     """Uludagsozlukten bisey getir"""
-    handler(uludag(trigger.group(2)), bot, trigger)
+    cevap_ver(uludag(trigger.group(2)), bot, trigger)
 
 
 @module.rule('.+$nickname')
@@ -99,10 +99,7 @@ def sozluk(bot, trigger):
 
     fs = random.sample([inci, eksi, uludag], 3)
     cevap = fs[0](sorgu) or fs[1](sorgu) or fs[2](sorgu)
-    if not cevap:
-        bot.reply('Hic bisey bulamadim')
-    else:
-        bot.reply(cevap)
+    cevap_ver(cevap, bot, trigger)
 
 
 # Kanal gundeminin belirlenmesi
@@ -129,7 +126,7 @@ def gundem(bot, trigger):
     if konusma_sayisi >= 30:
         en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
         cevap = eksi(en_cok_konusulan)
-        handler(cevap, bot, trigger)
+        cevap_ver(cevap, bot, trigger)
 
         konusulan_kelimeler = []
         konusma_sayisi = 0
