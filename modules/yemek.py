@@ -24,7 +24,6 @@ def zaman_hesapla(bot, trigger):
 @module.commands('yemek')
 @module.commands('y')
 def yemek(bot, trigger):
-    print('Yemek cagrildi')
     if not trigger.group(2):
         rastgele_bi_yer_bul(bot, trigger)
     elif trigger.group(2) == 'go':
