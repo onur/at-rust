@@ -111,7 +111,8 @@ konusma_sayisi = 0
 @module.priority('low')
 def gundem(bot, trigger):
     # Bunu sadece #ygz icin kullanacagiz
-    if trigger.is_privmsg or trigger.sender != '#ygz':
+    if (trigger.is_privmsg or trigger.sender != '#ygz'
+                           or trigger.nick == bot.nick):
         return None
 
     # FIXME: globalden baska bir cozum olsa daha iyi olurdu
