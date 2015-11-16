@@ -94,7 +94,7 @@ def sozluk(bot, trigger):
     # eger sorguda cok fazla kelime geciyorsa
     # sadece 1 tanesini kullaniyoruz
     sorgu_kelimeler = sorgu.split()
-    if len(sorgu_kelimeler) > 3:
+    if len(sorgu_kelimeler) > 5:
         sorgu = random.choice(sorgu_kelimeler)
 
     fs = random.sample([inci, eksi, uludag], 3)
@@ -107,7 +107,6 @@ konusulan_kelimeler = []
 konusma_sayisi = 0
 
 
-@module.event('MSG')
 @module.rule('.*')
 @module.thread(False)
 @module.priority('low')
@@ -129,8 +128,8 @@ def gundem(bot, trigger):
 
     konusma_sayisi += 1
 
-    # her 51 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
-    if konusma_sayisi >= 51:
+    # her 31 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
+    if konusma_sayisi >= 31:
         en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
         cevap = inci(en_cok_konusulan) or eksi(en_cok_konusulan)
         if cevap:
