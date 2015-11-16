@@ -107,7 +107,9 @@ konusulan_kelimeler = []
 konusma_sayisi = 0
 
 
+@module.event('MSG')
 @module.rule('.*')
+@module.thread(False)
 @module.priority('low')
 def gundem(bot, trigger):
     # Bunu sadece #ygz icin kullanacagiz
@@ -128,7 +130,7 @@ def gundem(bot, trigger):
     konusma_sayisi += 1
 
     # her 31 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
-    if konusma_sayisi >= 31:
+    if konusma_sayisi >= 51:
         en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
         cevap_ver(eksi(en_cok_konusulan), bot, trigger)
 
