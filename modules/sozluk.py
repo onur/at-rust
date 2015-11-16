@@ -108,14 +108,17 @@ konusma_sayisi = 0
 
 
 @module.rule('.*')
+@module.priority('low')
 def gundem(bot, trigger):
+    # Bunu sadece #ygz icin kullanacagiz
+    if trigger.is_privmsg or trigger.sender != '#ygz':
+        return None
+
     # FIXME: globalden baska bir cozum olsa daha iyi olurdu
     global konusulan_kelimeler
     global konusma_sayisi
 
-    kelimeler = trigger.split()
-
-    for kelime in kelimeler:
+    for kelime in trigger.split():
         # En az 5 karakterli sadece harf ve rakamlardan
         # olusan kelimeleri ekliyoruz
         if len(kelime) >= 5 and re.match('^\w+$', kelime):
@@ -123,10 +126,10 @@ def gundem(bot, trigger):
 
     konusma_sayisi += 1
 
-    if konusma_sayisi >= 30:
+    # her 31 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
+    if konusma_sayisi >= 31:
         en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
-        cevap = eksi(en_cok_konusulan)
-        cevap_ver(cevap, bot, trigger)
+        cevap_ver(eksi(en_cok_konusulan), bot, trigger)
 
         konusulan_kelimeler = []
         konusma_sayisi = 0
