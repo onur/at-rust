@@ -86,7 +86,7 @@ def ulu_komutu(bot, trigger):
 
 
 @module.rule('.+ $nickname')
-@module.rule('$nickname[ :].+')
+@module.rule('$nickname[ !?,.:].+')
 def sozluk(bot, trigger):
     # gecen cumle icinden botun adini cikar
     sorgu = trigger.replace(bot.nick, '').strip()
