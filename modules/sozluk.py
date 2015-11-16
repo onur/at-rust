@@ -85,8 +85,8 @@ def ulu_komutu(bot, trigger):
     cevap_ver(uludag(trigger.group(2)), bot, trigger)
 
 
-@module.rule('.+$nickname')
-@module.rule('$nickname.+')
+@module.rule('.+ $nickname')
+@module.rule('$nickname[ :].+')
 def sozluk(bot, trigger):
     # gecen cumle icinden botun adini cikar
     sorgu = trigger.replace(bot.nick, '').strip()
