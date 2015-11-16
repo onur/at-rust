@@ -129,10 +129,12 @@ def gundem(bot, trigger):
 
     konusma_sayisi += 1
 
-    # her 31 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
+    # her 51 mesajlasmada bir, gundem bulunup eksiden cevabi gosteriliyor
     if konusma_sayisi >= 51:
         en_cok_konusulan = Counter(konusulan_kelimeler).most_common(1)[0][0]
-        cevap_ver(eksi(en_cok_konusulan), bot, trigger)
+        cevap = inci(en_cok_konusulan) or eksi(en_cok_konusulan)
+        if cevap:
+            cevap_ver(cevap, bot, trigger)
 
         konusulan_kelimeler = []
         konusma_sayisi = 0
