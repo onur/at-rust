@@ -14,4 +14,4 @@ def sarap(bot, trigger):
     # deltayi gune cevirelim
     gun = int(round(delta / (60 * 60 * 24)))
 
-    bot.reply('Sarab gun sayisi: ' + gun)
+    bot.reply('Sarap gun sayisi: ' + str(gun))
