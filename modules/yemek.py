@@ -23,6 +23,7 @@ def zaman_hesapla(bot, trigger):
 
 @module.commands('yemek')
 @module.commands('y')
+@module.thread(False)
 def yemek(bot, trigger):
     if not trigger.group(2):
         rastgele_bi_yer_bul(bot, trigger)
