@@ -1,0 +1,9 @@
+[package]
+name = "at-rust"
+version = "0.1.0"
+authors = ["Onur Aslan <onuraslan@gmail.com>"]
+
+[dependencies]
+irc = "0.9"
+regex = "0.1"
+hyper = "0.7"

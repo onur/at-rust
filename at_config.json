@@ -1,0 +1,14 @@
+{
+    "owners": ["onur"],
+    "nickname": "at_rust",
+    "username": "at_rust",
+    "realname": "Rust Rocks",
+    "password": "",
+    "server": "chat.freenode.net",
+    "port": 6667,
+    "use_ssl": false,
+    "encoding": "UTF-8",
+    "channels": ["#dedeler"],
+    "umodes": "",
+    "options": {}
+}
