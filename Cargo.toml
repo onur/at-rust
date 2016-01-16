@@ -7,3 +7,5 @@ authors = ["Onur Aslan <onuraslan@gmail.com>"]
 irc = "0.9"
 regex = "0.1"
 hyper = "0.7"
+select = "0.2"
+rand = "0.3"

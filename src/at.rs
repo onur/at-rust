@@ -144,7 +144,7 @@ impl AtRust {
         self.server.send_privmsg(&trigger.target[..], src).unwrap();
     }
 
-    pub fn reply(&self, trigger: &AtTrigger, src: &'static str) {
+    pub fn reply(&self, trigger: &AtTrigger, src: &str) {
         let message = format!("{}: {}", trigger.user, src);
         self.say(trigger, &message[..]);
     }

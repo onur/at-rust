@@ -2,6 +2,9 @@
 extern crate irc;
 extern crate regex;
 extern crate hyper;
+extern crate select;
+extern crate rand;
+
 
 mod at;
 mod plugins;
