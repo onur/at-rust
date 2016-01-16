@@ -5,7 +5,6 @@ use plugins::get;
 
 use select::document::Document;
 use select::predicate::{Attr, Class, Name};
-use rand::Rng;
 use rand;
 
 
@@ -25,7 +24,5 @@ pub fn eksi(trigger: &AtTrigger, at: &AtRust) {
         entries.push(entry_text.clone());
     }
 
-    let mut rng = rand::thread_rng();
-
-    at.reply(trigger, &entries[rng.gen::<usize>() % entries.len()][..]);
+    at.reply(trigger, &entries[rand::random::<usize>() % entries.len()][..]);
 }
