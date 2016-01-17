@@ -15,7 +15,7 @@ pub fn get_eksi(query: &str) -> Option<Vec<String>> {
 
     let body = match get(&url[..]) {
         Some(n) => n,
-        None => return None
+        None => return None,
     };
 
     let document = Document::from_str(&body[..]);
@@ -30,7 +30,7 @@ pub fn get_eksi(query: &str) -> Option<Vec<String>> {
 
     return match entries.len() {
         0 => None,
-        _ => Some(entries)
+        _ => Some(entries),
     };
 
 }
@@ -41,7 +41,10 @@ pub fn eksi(trigger: &AtTrigger, at: &AtRust) {
     let entries = get_eksi(&trigger.command_message[..]);
 
     match entries {
-        Some(entries) => at.reply(trigger, &entries[rand::random::<usize>() % entries.len()][..]),
+        Some(entries) => {
+            at.reply(trigger,
+                     &entries[rand::random::<usize>() % entries.len()][..])
+        }
         None => {}
     }
 
