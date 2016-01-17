@@ -9,12 +9,16 @@ use rand;
 
 
 
-pub fn eksi(trigger: &AtTrigger, at: &AtRust) {
-    let url = format!("https://eksisozluk.com/{}", trigger.command_message);
-    let body = get(&url[..]);
+pub fn get_eksi(query: &str) -> Option<Vec<String>> {
 
-    let body_str = body.unwrap();
-    let document = Document::from_str(&body_str[..]);
+    let url = format!("https://eksisozluk.com/{}", query);
+
+    let body = match get(&url[..]) {
+        Some(n) => n,
+        None => return None
+    };
+
+    let document = Document::from_str(&body[..]);
 
     let mut entries: Vec<String> = Vec::new();
 
@@ -24,5 +28,21 @@ pub fn eksi(trigger: &AtTrigger, at: &AtRust) {
         entries.push(entry_text.clone());
     }
 
-    at.reply(trigger, &entries[rand::random::<usize>() % entries.len()][..]);
+    return match entries.len() {
+        0 => None,
+        _ => Some(entries)
+    };
+
+}
+
+
+pub fn eksi(trigger: &AtTrigger, at: &AtRust) {
+
+    let entries = get_eksi(&trigger.command_message[..]);
+
+    match entries {
+        Some(entries) => at.reply(trigger, &entries[rand::random::<usize>() % entries.len()][..]),
+        None => {}
+    }
+
 }
